@@ -2,14 +2,17 @@
   "name": "culinary-connect",
   "version": "1.0.0",
   "description": "A Recipe generator App",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/PrayagTandon/CulinaryConnect.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "author": "Prayag Tandon",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
 }
