@@ -17,13 +17,14 @@ const timeout = function (s) {
 
 ///////////////////////////////////////
 
-/* Adding spinner as an event listener to the searchBtn */
+/* Adding spinner as an event listener to the searchBtn 
 searchBtn.addEventListener('click', function (e) {
   e.preventDefault();
   renderSpinner(recipeContainer);
   showRecipe();
 })
 
+*/
 
 /* Rendering the Spinner */
 const renderSpinner = function (parentEl) {
@@ -42,9 +43,15 @@ const renderSpinner = function (parentEl) {
 /* First API call - For a single API call */
 const showRecipe = async function () {
   try {
+    const id = window.location.hash.slice(1);
+
+    if (!id) return;
+
+    /* Render Spinner */
+    renderSpinner(recipeContainer);
 
     /* 1) Making an API call */
-    const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886');
+    const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`);
 
     const data = await res.json();
 
@@ -62,8 +69,6 @@ const showRecipe = async function () {
       title: recipe.title,
       ingredients: recipe.ingredients,
     };
-
-    console.log(recipe);
 
     /* 2) Rendering the call */
     const markup = `
@@ -160,5 +165,10 @@ const showRecipe = async function () {
   catch (err) {
     alert(err)
   }
-}
-// showRecipe();
+};
+
+/* Easier way to listen to all changes */
+['hashchange', 'load'].forEach(ev => window.addEventListener(ev, showRecipe));
+
+// window.addEventListener('hashchange', showRecipe);
+// window.addEventListener('load', showRecipe);
