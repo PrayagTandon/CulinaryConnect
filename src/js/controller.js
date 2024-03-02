@@ -50,25 +50,7 @@ const showRecipe = async function () {
     /* Render Spinner */
     renderSpinner(recipeContainer);
 
-    /* 1) Making an API call */
-    const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`);
 
-    const data = await res.json();
-
-    if (!res.ok) throw new Error(`${data.message} (${res.status}) - Invalid ID requested!!`);
-
-    let { recipe } = data.data;
-
-    recipe = {
-      id: recipe.id,
-      img: recipe.image_url,
-      cookingTime: recipe.cooking_time,
-      publisher: recipe.publisher,
-      servings: recipe.servings,
-      sourceURL: recipe.source_url,
-      title: recipe.title,
-      ingredients: recipe.ingredients,
-    };
 
     /* 2) Rendering the call */
     const markup = `
