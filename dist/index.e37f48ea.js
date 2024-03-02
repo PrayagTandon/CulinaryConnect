@@ -585,11 +585,12 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"aenu9":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _webImmediateJs = require("core-js/modules/web.immediate.js");
+var _webImmediateJs = require("core-js/modules/web.immediate.js"); // showRecipe();
 var _iconsSvg = require("url:../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 var _runtime = require("regenerator-runtime/runtime");
 const recipeContainer = document.querySelector(".recipe");
+const searchBtn = document.querySelector(".search__btn");
 const timeout = function(s) {
     return new Promise(function(_, reject) {
         setTimeout(function() {
@@ -599,6 +600,11 @@ const timeout = function(s) {
 };
 // API location -> https://forkify-api.herokuapp.com/v2
 ///////////////////////////////////////
+/* Adding spinner as an event listener to the searchBtn */ searchBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    renderSpinner(recipeContainer);
+    showRecipe();
+});
 /* Rendering the Spinner */ const renderSpinner = function(parentEl) {
     const markup = `
     <div class="spinner">
@@ -612,7 +618,6 @@ const timeout = function(s) {
 };
 /* First API call - For a single API call */ const showRecipe = async function() {
     try {
-        /* Rendering the spinner */ renderSpinner(recipeContainer);
         /* 1) Making an API call */ const res = await fetch("https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886");
         const data = await res.json();
         if (!res.ok) throw new Error(`${data.message} (${res.status}) - Invalid ID requested!!`);
@@ -722,7 +727,6 @@ const timeout = function(s) {
         alert(err);
     }
 };
-showRecipe();
 
 },{"url:../img/icons.svg":"loVOp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ"}],"loVOp":[function(require,module,exports) {
 module.exports = require("9bcc84ee5d265e38").getBundleURL("hWUTQ") + "icons.dfd7a6db.svg" + "?" + Date.now();

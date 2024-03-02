@@ -3,6 +3,7 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 const recipeContainer = document.querySelector('.recipe');
+const searchBtn = document.querySelector('.search__btn');
 
 const timeout = function (s) {
   return new Promise(function (_, reject) {
@@ -15,6 +16,14 @@ const timeout = function (s) {
 // API location -> https://forkify-api.herokuapp.com/v2
 
 ///////////////////////////////////////
+
+/* Adding spinner as an event listener to the searchBtn */
+searchBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  renderSpinner(recipeContainer);
+  showRecipe();
+})
+
 
 /* Rendering the Spinner */
 const renderSpinner = function (parentEl) {
@@ -33,8 +42,6 @@ const renderSpinner = function (parentEl) {
 /* First API call - For a single API call */
 const showRecipe = async function () {
   try {
-    /* Rendering the spinner */
-    renderSpinner(recipeContainer);
 
     /* 1) Making an API call */
     const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886');
@@ -154,4 +161,4 @@ const showRecipe = async function () {
     alert(err)
   }
 }
-showRecipe();
+// showRecipe();
