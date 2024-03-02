@@ -262,7 +262,12 @@ body {
   width: 24rem;
   height: 4.6rem;
   margin-left: 4rem;
+  transition: all .3s ease-in-out;
   display: block;
+}
+
+.header__logo:hover {
+  cursor: pointer;
 }
 
 .search {
