@@ -1,3 +1,5 @@
+import * as model from './model.js';
+
 import icons from 'url:../img/icons.svg';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -39,18 +41,17 @@ const renderSpinner = function (parentEl) {
   parentEl.insertAdjacentHTML('afterbegin', markup);
 }
 
-
-/* First API call - For a single API call */
 const showRecipe = async function () {
   try {
     const id = window.location.hash.slice(1);
 
     if (!id) return;
 
-    /* Render Spinner */
+    // Rendering the spinner
     renderSpinner(recipeContainer);
 
-
+    // Loading the recipe
+    await model.loadRecipe(id);
 
     /* 2) Rendering the call */
     const markup = `
