@@ -588,6 +588,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _webImmediateJs = require("core-js/modules/web.immediate.js"); // window.addEventListener('hashchange', showRecipe);
  // window.addEventListener('load', showRecipe);
 var _modelJs = require("./model.js");
+var _recipeViewJs = require("./views/recipeView.js");
+var _recipeViewJsDefault = parcelHelpers.interopDefault(_recipeViewJs);
 var _iconsSvg = require("url:../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 var _runtime = require("regenerator-runtime/runtime");
@@ -628,7 +630,9 @@ const showRecipe = async function() {
         renderSpinner(recipeContainer);
         // Loading the recipe
         await _modelJs.loadRecipe(id);
-        /* 2) Rendering the call */ const markup = `
+        const { recipe } = _modelJs.state;
+        /* 2) Rendering the call */ (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
+        const markup = `
       <figure class="recipe__fig">
           <img src="${recipe.img}" alt="${recipe.title}" class="recipe__img" />
           <h1 class="recipe__title">
@@ -727,7 +731,7 @@ const showRecipe = async function() {
     "load"
 ].forEach((ev)=>window.addEventListener(ev, showRecipe));
 
-},{"url:../img/icons.svg":"loVOp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","./model.js":"Y4A21"}],"loVOp":[function(require,module,exports) {
+},{"url:../img/icons.svg":"loVOp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","./model.js":"Y4A21","./views/recipeView.js":"l60JC"}],"loVOp":[function(require,module,exports) {
 module.exports = require("9bcc84ee5d265e38").getBundleURL("hWUTQ") + "icons.dfd7a6db.svg" + "?" + Date.now();
 
 },{"9bcc84ee5d265e38":"lgJ39"}],"lgJ39":[function(require,module,exports) {
@@ -2643,6 +2647,18 @@ const loadRecipe = async function(id) {
     }
 };
 
-},{"regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["hycaY","aenu9"], "aenu9", "parcelRequire37b9")
+},{"regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l60JC":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class RecipeView {
+    #parentElement = document.querySelector(".recipe");
+    #data;
+    render(data) {
+        this.#data = data;
+    }
+}
+exports.default = new RecipeView();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["hycaY","aenu9"], "aenu9", "parcelRequire37b9")
 
 //# sourceMappingURL=index.e37f48ea.js.map
