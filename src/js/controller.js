@@ -1,13 +1,11 @@
 import * as model from './model.js';
 import recipeView from './views/recipeView.js';
-
-
 import icons from 'url:../img/icons.svg';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 const recipeContainer = document.querySelector('.recipe');
-const searchBtn = document.querySelector('.search__btn');
+// const searchBtn = document.querySelector('.search__btn');
 
 const timeout = function (s) {
   return new Promise(function (_, reject) {
