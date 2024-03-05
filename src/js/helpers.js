@@ -1,5 +1,4 @@
 /* Contains functions that are used over the project repeatdely.. */
-
 import { TIMEOUT_SECONDS } from "./config.js";
 
 const timeout = function (s) {
