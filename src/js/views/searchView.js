@@ -17,7 +17,7 @@ class SearchView {
         this.#parentElement.addEventListener('submit', function (e) {
             e.preventDefault();
             handler();
-        })
+        });
     }
 };
 

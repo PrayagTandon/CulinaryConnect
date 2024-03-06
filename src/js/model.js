@@ -8,7 +8,7 @@ export const state = {
     search: {
         query: '',
         results: []
-    }
+    },
 };
 
 export const loadRecipe = async function (id) {
