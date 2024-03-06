@@ -2,36 +2,41 @@ import icons from '../../img/icons.svg';
 import { Fraction } from 'fractional';
 
 class RecipeView {
-    #parentElement = document.querySelector('.recipe');
-    #data;
+  #parentElement = document.querySelector('.recipe');
+  #data;
 
-    render(data) {
-        this.#data = data;
-        const markup = this.#generateMarkup();
+  render(data) {
+    this.#data = data;
+    const markup = this.#generateMarkup();
 
-        this.#clear();
-        this.#parentElement.insertAdjacentHTML('afterbegin', markup);
-    }
+    this.#clear();
+    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
 
-    #clear() {
-        this.#parentElement.innerHTML = '';
-    }
+  #clear() {
+    this.#parentElement.innerHTML = '';
+  }
 
-    /* Rendering the Spinner */
-    renderSpinner = function () {
-        const markup = `
+  // Rendering the Spinner
+  renderSpinner = function () {
+    const markup = `
     <div class="spinner">
           <svg>
             <use href="${icons}#icon-loader"></use>
           </svg>
         </div>
   `;
-        this.#parentElement.innerHTML = '';
-        this.#parentElement.insertAdjacentHTML('afterbegin', markup);
-    }
+    this.#parentElement.innerHTML = '';
+    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
 
-    #generateMarkup() {
-        return `
+  addHandlerRender = function (funcCallback) {
+    ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, funcCallback));
+  }
+
+  // Generating Markup
+  #generateMarkup() {
+    return `
       <figure class="recipe__fig">
           <img src="${this.#data.img}" alt="${this.#data.title}" class="recipe__img" />
           <h1 class="recipe__title">
@@ -106,10 +111,11 @@ class RecipeView {
           </a>
         </div>
         `
-    }
+  }
 
-    #generateIngredients(ing) {
-        return `
+  // Generating ingredients list
+  #generateIngredients(ing) {
+    return `
                 <li class="recipe__ingredient">
                   <svg class="recipe__icon">
                     <use href="${icons}#icon-check"></use>
@@ -121,7 +127,7 @@ class RecipeView {
                   </div>
                 </li >
               `;
-    }
+  }
 };
 
 export default new RecipeView();
