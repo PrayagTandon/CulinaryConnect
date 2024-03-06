@@ -603,7 +603,7 @@ const controlRecipes = async function() {
         // 2) Rendering the call
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
     } catch (err) {
-        alert(err);
+        (0, _recipeViewJsDefault.default).renderError();
     }
 };
 const init = function() {
@@ -2486,6 +2486,7 @@ const loadRecipe = async function(id) {
         };
     } catch (err) {
         console.error(`${err} \u{1F525}\u{1F525}\u{1F525}\u{1F525}`);
+        throw err;
     }
 };
 
@@ -2532,6 +2533,8 @@ var _fractional = require("fractional");
 class RecipeView {
     #parentElement = document.querySelector(".recipe");
     #data;
+    #errorMessage = `We couldn't find any recipe for your query! Please try another recipe`;
+    #successMessage = "";
     render(data) {
         this.#data = data;
         const markup = this.#generateMarkup();
@@ -2542,7 +2545,7 @@ class RecipeView {
         this.#parentElement.innerHTML = "";
     }
     // Rendering the Spinner
-    renderSpinner = function() {
+    renderSpinner() {
         const markup = `
     <div class="spinner">
           <svg>
@@ -2550,15 +2553,46 @@ class RecipeView {
           </svg>
         </div>
   `;
-        this.#parentElement.innerHTML = "";
+        this.#clear();
         this.#parentElement.insertAdjacentHTML("afterbegin", markup);
-    };
-    addHandlerRender = function(funcCallback) {
+    }
+    // Rendering Error Message
+    renderError(message = this.#errorMessage) {
+        const markup = `
+      <div class="error">
+        <div>
+          <svg>
+            <use href="${(0, _iconsSvgDefault.default)}#icon-alert-triangle"></use>
+          </svg>
+        </div>
+        <p>${message}</p>
+      </div>
+    `;
+        this.#clear();
+        this.#parentElement.insertAdjacentHTML("afterbegin", markup);
+    }
+    // Rendering Success Message
+    renderSuccess(message) {
+        const markup = `
+      <div class="message">
+        <div>
+          <svg>
+            <use href="${(0, _iconsSvgDefault.default)}#icon-smile"></use>
+          </svg>
+        </div>
+        <p>${message}</p>
+      </div>
+    `;
+        this.#clear();
+        this.#parentElement.insertAdjacentHTML("afterbegin", markup);
+    }
+    // Handling the recipes
+    addHandlerRender(funcCallback) {
         [
             "hashchange",
             "load"
         ].forEach((ev)=>window.addEventListener(ev, funcCallback));
-    };
+    }
     // Generating Markup
     #generateMarkup() {
         return `
