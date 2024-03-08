@@ -617,7 +617,8 @@ const controlSearchResults = async function() {
         // 2) Load search results
         await _modelJs.loadSearchResults(query);
         // 3) Render search results
-        console.log(_modelJs.state.search);
+        // console.log(model.state.search);
+        (0, _resultsViewJsDefault.default).render(_modelJs.state.search.results);
     } catch (err) {
         console.log(err);
     }
@@ -2660,7 +2661,7 @@ class RecipeView extends (0, _viewJsDefault.default) {
         `;
     }
     // Generating ingredients list
-    #generateIngredients(ing) {
+    _generateIngredients(ing) {
         return `
                 <li class="recipe__ingredient">
                   <svg class="recipe__icon">
@@ -3058,11 +3059,37 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./view.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+var _iconsSvg = require("../../img/icons.svg");
+var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class ResultsView extends (0, _viewJsDefault.default) {
     _parentElement = document.querySelector(".results");
+    _generateMarkup() {
+        console.log(this._data);
+        return this._data.map(this._generateMarkupPreview).join("");
+    }
+    _generateMarkupPreview(result) {
+        return `
+            <li class="preview">
+                <a class="preview__link preview__link--active" href="3${result.id}">
+                <figure class="preview__fig">
+                    <img src="${result.img}" alt="Test" />
+                </figure>
+                    <div class="preview__data">
+                        <h4 class="preview__title">${result.title}</h4>
+                        <p class="preview__publisher">${result.publisher}</p>
+                        <div class="preview__user-generated">
+                            <svg>
+                                <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+          </li>
+        `;
+    }
 }
 exports.default = new ResultsView();
 
-},{"./view.js":"bWlJ9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["hycaY","aenu9"], "aenu9", "parcelRequire37b9")
+},{"./view.js":"bWlJ9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../img/icons.svg":"cMpiy"}]},["hycaY","aenu9"], "aenu9", "parcelRequire37b9")
 
 //# sourceMappingURL=index.e37f48ea.js.map

@@ -92,7 +92,7 @@ class RecipeView extends View {
   }
 
   // Generating ingredients list
-  #generateIngredients(ing) {
+  _generateIngredients(ing) {
     return `
                 <li class="recipe__ingredient">
                   <svg class="recipe__icon">
