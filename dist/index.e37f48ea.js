@@ -618,10 +618,9 @@ const controlSearchResults = async function() {
         // 2) Load search results
         await _modelJs.loadSearchResults(query);
         // 3) Render search results
-        // console.log(model.state.search);
         (0, _resultsViewJsDefault.default).render(_modelJs.state.search.results);
     } catch (err) {
-        console.log(err);
+        (0, _resultsViewJsDefault.default).renderError();
     }
 };
 const init = function() {
@@ -2525,7 +2524,7 @@ const loadSearchResults = async function(query) {
             };
         });
     } catch (err) {
-        console.log(`${err} \u{1F4A3}\u{1F4A3}`);
+        console.error(`${err} \u{1F525}\u{1F525}\u{1F525}\u{1F525}`);
         throw err;
     }
 };
@@ -2976,6 +2975,7 @@ var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class View {
     _data;
     render(data) {
+        if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
         this._data = data;
         const markup = this._generateMarkup();
         this._clear();
@@ -3061,8 +3061,9 @@ var _iconsSvg = require("../../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class ResultsView extends (0, _viewJsDefault.default) {
     _parentElement = document.querySelector(".results");
+    _errorMessage = `No recipe found for your query! Please try another query :)`;
+    _successMessage = "";
     _generateMarkup() {
-        console.log(this._data);
         return this._data.map(this._generateMarkupPreview).join("");
     }
     _generateMarkupPreview(result) {
