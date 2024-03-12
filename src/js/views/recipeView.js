@@ -52,7 +52,7 @@ class RecipeView extends View {
                   <use href="${icons}#icon-minus-circle"></use>
                 </svg>
               </button>
-              <button class="btn--tiny btn--increase-servings">
+              <button class="btn--tiny btn--decrease-servings">
                 <svg>
                   <use href="${icons}#icon-plus-circle"></use>
                 </svg>

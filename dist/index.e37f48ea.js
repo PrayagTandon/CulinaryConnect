@@ -632,7 +632,7 @@ const controlPagination = function(goToPage) {
     // 2) Render NEW Pagination View
     (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
 };
-const controlServings = function() {
+const controlServings = function(newServings) {
     // Update the recipe servings(in state)
     _modelJs.updateServings(8);
     // Update the Recipe View
@@ -2659,7 +2659,7 @@ class RecipeView extends (0, _viewJsDefault.default) {
                   <use href="${0, _iconsSvgDefault.default}#icon-minus-circle"></use>
                 </svg>
               </button>
-              <button class="btn--tiny btn--increase-servings">
+              <button class="btn--tiny btn--decrease-servings">
                 <svg>
                   <use href="${0, _iconsSvgDefault.default}#icon-plus-circle"></use>
                 </svg>
