@@ -606,8 +606,6 @@ const controlRecipes = async function() {
         await _modelJs.loadRecipe(id);
         // 2) Rendering the call
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
-        // TEST
-        controlServings();
     } catch (err) {
         (0, _recipeViewJsDefault.default).renderError();
     }
@@ -636,12 +634,13 @@ const controlPagination = function(goToPage) {
 };
 const controlServings = function() {
     // Update the recipe servings(in state)
-    _modelJs.updateServings(4);
+    _modelJs.updateServings(8);
     // Update the Recipe View
     (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
 };
 const init = function() {
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
+    (0, _recipeViewJsDefault.default).addHandlerUpdateServings(controlServings);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
     (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
 };
@@ -2620,6 +2619,14 @@ class RecipeView extends (0, _viewJsDefault.default) {
             "hashchange",
             "load"
         ].forEach((ev)=>window.addEventListener(ev, funcCallback));
+    }
+    addHandlerUpdateServings(handler) {
+        this._parentElement.addEventListener("click", function(e) {
+            const btn = e.target.closest(".btn--tiny");
+            if (!btn) return;
+            console.log(btn);
+            handler();
+        });
     }
     // Generating Markup
     _generateMarkup() {
