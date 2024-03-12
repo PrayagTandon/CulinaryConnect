@@ -634,7 +634,7 @@ const controlPagination = function(goToPage) {
 };
 const controlServings = function(newServings) {
     // Update the recipe servings(in state)
-    _modelJs.updateServings(8);
+    _modelJs.updateServings(newServings);
     // Update the Recipe View
     (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
 };
@@ -2622,10 +2622,10 @@ class RecipeView extends (0, _viewJsDefault.default) {
     }
     addHandlerUpdateServings(handler) {
         this._parentElement.addEventListener("click", function(e) {
-            const btn = e.target.closest(".btn--tiny");
+            const btn = e.target.closest(".btn--update-servings");
             if (!btn) return;
-            console.log(btn);
-            handler();
+            const { updateTo } = btn.dataset;
+            if (+updateTo > 0) handler(+updateTo);
         });
     }
     // Generating Markup
@@ -2654,12 +2654,12 @@ class RecipeView extends (0, _viewJsDefault.default) {
             <span class="recipe__info-text">servings</span>
 
             <div class="recipe__info-buttons">
-              <button class="btn--tiny btn--increase-servings">
+              <button class="btn--tiny btn--update-servings" data-update-to = "${this._data.servings - 1}">
                 <svg>
                   <use href="${0, _iconsSvgDefault.default}#icon-minus-circle"></use>
                 </svg>
               </button>
-              <button class="btn--tiny btn--decrease-servings">
+              <button class="btn--tiny btn--update-servings" data-update-to = "${this._data.servings + 1}">
                 <svg>
                   <use href="${0, _iconsSvgDefault.default}#icon-plus-circle"></use>
                 </svg>
