@@ -597,7 +597,9 @@ var _paginationViewJs = require("./views/paginationView.js");
 var _paginationViewJsDefault = parcelHelpers.interopDefault(_paginationViewJs);
 var _runtime = require("regenerator-runtime/runtime");
 // API location -> https://forkify-api.herokuapp.com/v2
-if (module.hot) module.hot.accept();
+// if (module.hot) {
+//   module.hot.accept();
+// }
 const controlRecipes = async function() {
     try {
         const id = window.location.hash.slice(1);
@@ -3111,12 +3113,16 @@ var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class PaginationView extends (0, _viewJsDefault.default) {
     _parentElement = document.querySelector(".pagination");
     _generateMarkup() {
-        const numPages = this._data.results.length / this._data.resultsPerPage;
-        console.log(numPages, this._data.results);
-    // At Page 1 and there are other pages
-    // At Page 1 and there are NO other pages
-    // Last Page
-    // Any other page
+        const numPages = Math.ceil(this._data.results.length / this._data.resultsPerPage);
+        console.log(numPages);
+        // At Page 1 and there are other pages
+        if (this._data.page === 1 && numPages > 1) return `Page 1, Other page available`;
+        // Last Page
+        if (this._data.page === numPages && numPages > 1) return `Last Page`;
+        // Any other page
+        if (this._data.page !== 1 && this._data.page < numPages) return `Any other page`;
+        // At Page 1 and there are NO other pages
+        return `No other page`;
     }
 }
 exports.default = new PaginationView();
