@@ -503,7 +503,7 @@ body {
 }
 
 .pagination {
-  margin-top: auto;
+  margin-top: 2.4rem;
   padding: 0 3.5rem;
 }
 
@@ -523,7 +523,7 @@ body {
 
 .copyright {
   color: #918581;
-  margin-top: 4rem;
+  margin-top: auto;
   padding: 0 3.5rem;
   font-size: 1.2rem;
 }

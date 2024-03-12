@@ -10,7 +10,7 @@
 }
 
 .pagination {
-  margin-top: auto;
+  margin-top: 2.4rem;
   padding: 0 3.5rem;
 
   &::after {
@@ -23,6 +23,7 @@
     &--prev {
       float: left;
     }
+
     &--next {
       float: right;
     }
@@ -33,7 +34,7 @@
   color: $color-grey-dark-2;
   font-size: 1.2rem;
   padding: 0 3.5rem;
-  margin-top: 4rem;
+  margin-top: auto;
 
   .twitter-link:link,
   .twitter-link:visited {
