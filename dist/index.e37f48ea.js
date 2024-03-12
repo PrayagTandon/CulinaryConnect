@@ -606,6 +606,8 @@ const controlRecipes = async function() {
         await _modelJs.loadRecipe(id);
         // 2) Rendering the call
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
+        // TEST
+        controlServings();
     } catch (err) {
         (0, _recipeViewJsDefault.default).renderError();
     }
@@ -634,7 +636,7 @@ const controlPagination = function(goToPage) {
 };
 const controlServings = function() {
     // Update the recipe servings(in state)
-    _modelJs.updateServings(6);
+    _modelJs.updateServings(4);
     // Update the Recipe View
     (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
 };
