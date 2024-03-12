@@ -258,7 +258,7 @@
 118D:\Big-projects\Culinary-connect(Forkify) - Frontend\node_modules\csso\node_modules\css-tree\cjs\syntax\node\index.cjs133536886578407014 0
 98D:\Big-projects\Culinary-connect(Forkify) - Frontend\node_modules\@parcel\core\lib\ParcelConfig.js133536886590317347 0
 134D:\Big-projects\Culinary-connect(Forkify) - Frontend\node_modules\@parcel\optimizer-htmlnano\node_modules\css-select\lib\attributes.js133536886539764157 0
-68D:\Big-projects\Culinary-connect(Forkify) - Frontend\src\js\model.js133543545951080991 0
+68D:\Big-projects\Culinary-connect(Forkify) - Frontend\src\js\model.js133546925811457760 0
 97D:\Big-projects\Culinary-connect(Forkify) - Frontend\node_modules\caniuse-lite\data\regions\MU.js133536886621706385 0
 107D:\Big-projects\Culinary-connect(Forkify) - Frontend\node_modules\core-js\actual\array\virtual\to-sorted.js133538324564080351 0
 104D:\Big-projects\Culinary-connect(Forkify) - Frontend\node_modules\core-js\features\array\virtual\some.js133538324557919567 0
@@ -9661,6 +9661,6 @@
 106D:\Big-projects\Culinary-connect(Forkify) - Frontend\dist\Culinary-connect(Forkify) - Frontend.3464ddca.js133537518976963036 0
 101D:\Big-projects\Culinary-connect(Forkify) - Frontend\dist\culinary-connect-favicon-color.3eeb721f.png133537515866675180 0
 120D:\Big-projects\Culinary-connect(Forkify) - Frontend\dist\culinary-connect-high-resolution-logo-transparent.a98f0eb5.png133537514212251302 0
+76D:\Big-projects\Culinary-connect(Forkify) - Frontend\dist\index.f7626f62.css133543546079768670 0
 68D:\Big-projects\Culinary-connect(Forkify) - Frontend\dist\index.html133543546079738091 0
 75D:\Big-projects\Culinary-connect(Forkify) - Frontend\dist\logo.726d37a8.png133543546079738091 0
-76D:\Big-projects\Culinary-connect(Forkify) - Frontend\dist\index.f7626f62.css133543546079768670 0
