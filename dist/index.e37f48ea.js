@@ -597,9 +597,6 @@ var _paginationViewJs = require("./views/paginationView.js");
 var _paginationViewJsDefault = parcelHelpers.interopDefault(_paginationViewJs);
 var _runtime = require("regenerator-runtime/runtime");
 // API location -> https://forkify-api.herokuapp.com/v2
-// if (module.hot) {
-//   module.hot.accept();
-// }
 const controlRecipes = async function() {
     try {
         const id = window.location.hash.slice(1);
@@ -634,6 +631,12 @@ const controlPagination = function(goToPage) {
     (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPage(goToPage));
     // 2) Render NEW Pagination View
     (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
+};
+const controlServings = function() {
+    // Update the recipe servings(in state)
+    _modelJs.updateServings(6);
+    // Update the Recipe View
+    (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
 };
 const init = function() {
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
@@ -2497,6 +2500,7 @@ parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
 parcelHelpers.export(exports, "loadSearchResults", ()=>loadSearchResults);
 parcelHelpers.export(exports, "getSearchResultsPage", ()=>getSearchResultsPage);
+parcelHelpers.export(exports, "updateServings", ()=>updateServings);
 var _configJs = require("./config.js");
 var _helpersJs = require("./helpers.js");
 const state = {
@@ -2522,6 +2526,7 @@ const loadRecipe = async function(id) {
             title: recipe.title,
             ingredients: recipe.ingredients
         };
+        console.log(state.recipe);
     } catch (err) {
         console.error(`${err} \u{1F525}\u{1F525}\u{1F525}\u{1F525}`);
         throw err;
@@ -2551,6 +2556,12 @@ const getSearchResultsPage = function(page = state.search.page) {
     const end = page * state.search.resultsPerPage //9;
     ;
     return state.search.results.slice(start, end);
+};
+const updateServings = function(newServings) {
+    state.recipe.ingredients.forEach((ingredient)=>{
+        ingredient.quantity = ingredient.quantity * newServings / state.recipe.servings;
+    });
+    state.recipe.servings = newServings;
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./config.js":"k5Hzs","./helpers.js":"hGI1E"}],"k5Hzs":[function(require,module,exports) {

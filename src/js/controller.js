@@ -8,10 +8,6 @@ import 'regenerator-runtime/runtime';
 
 // API location -> https://forkify-api.herokuapp.com/v2
 
-// if (module.hot) {
-//   module.hot.accept();
-// }
-
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
@@ -58,6 +54,14 @@ const controlPagination = function (goToPage) {
 
   // 2) Render NEW Pagination View
   paginationView.render(model.state.search);
+}
+
+const controlServings = function () {
+  // Update the recipe servings(in state)
+  model.updateServings(6);
+
+  // Update the Recipe View
+  recipeView.render(model.state.recipe);
 }
 
 const init = function () {
