@@ -1,7 +1,7 @@
 import { API_URL, RES_PER_PAGE } from "./config.js";
 import { getJSON } from "./helpers.js";
 
-/* Contains the state object, business logic and the HTTP librrary... */
+/* Contains the state object, business logic and the HTTP library... */
 
 export const state = {
     recipe: {},
@@ -29,7 +29,6 @@ export const loadRecipe = async function (id) {
             title: recipe.title,
             ingredients: recipe.ingredients,
         };
-        console.log(state.recipe);
     } catch (err) {
         console.error(`${err} 🔥🔥🔥🔥`);
         throw err;

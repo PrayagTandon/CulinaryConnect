@@ -2527,7 +2527,6 @@ const loadRecipe = async function(id) {
             title: recipe.title,
             ingredients: recipe.ingredients
         };
-        console.log(state.recipe);
     } catch (err) {
         console.error(`${err} \u{1F525}\u{1F525}\u{1F525}\u{1F525}`);
         throw err;
