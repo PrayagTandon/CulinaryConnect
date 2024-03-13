@@ -3038,7 +3038,10 @@ class View {
         const currElements = Array.from(this._parentElement.querySelectorAll("*"));
         newElements.forEach((newEl, i)=>{
             const currEl = currElements[i];
-            console.log(currEl, newEl.isEqualNode(currEl));
+            // Update Changed TEXT
+            if (!newEl.isEqualNode(currEl) && newEl.firstChild?.nodeValue.trim() !== "") currEl.textContent = newEl.textContent;
+            // Update Changed ATTRIBUTE
+            if (!newEl.isEqualNode(currEl)) Array.from(newEl.attributes).forEach((attr)=>currEl.setAttribute(attr.name, attr.value));
         });
     }
     _clear() {
