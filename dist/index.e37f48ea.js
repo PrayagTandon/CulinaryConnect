@@ -641,6 +641,10 @@ const controlServings = function(newServings) {
     // recipeView.render(model.state.recipe);
     (0, _recipeViewJsDefault.default).update(_modelJs.state.recipe);
 };
+const controlAddBookmark = function() {
+    _modelJs.addBookmark(_modelJs.state.recipe);
+    console.log(_modelJs.state.recipe);
+};
 const init = function() {
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
     (0, _recipeViewJsDefault.default).addHandlerUpdateServings(controlServings);
@@ -2505,6 +2509,7 @@ parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
 parcelHelpers.export(exports, "loadSearchResults", ()=>loadSearchResults);
 parcelHelpers.export(exports, "getSearchResultsPage", ()=>getSearchResultsPage);
 parcelHelpers.export(exports, "updateServings", ()=>updateServings);
+parcelHelpers.export(exports, "addBookmark", ()=>addBookmark);
 var _configJs = require("./config.js");
 var _helpersJs = require("./helpers.js");
 const state = {
@@ -2514,7 +2519,8 @@ const state = {
         results: [],
         page: 1,
         resultsPerPage: (0, _configJs.RES_PER_PAGE)
-    }
+    },
+    bookmarks: []
 };
 const loadRecipe = async function(id) {
     try {
@@ -2547,6 +2553,7 @@ const loadSearchResults = async function(query) {
                 title: recipe.title
             };
         });
+        state.search.page = 1;
     } catch (err) {
         console.error(`${err} \u{1F525}\u{1F525}\u{1F525}\u{1F525}`);
         throw err;
@@ -2565,6 +2572,12 @@ const updateServings = function(newServings) {
         ingredient.quantity = ingredient.quantity * newServings / state.recipe.servings;
     });
     state.recipe.servings = newServings;
+};
+const addBookmark = function(recipe) {
+    // Add Bookmark
+    state.bookmarks.push(recipe);
+    // Mark currrent recipe as bookmark
+    state.recipe.bookmarked = true;
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./config.js":"k5Hzs","./helpers.js":"hGI1E"}],"k5Hzs":[function(require,module,exports) {

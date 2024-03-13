@@ -11,6 +11,7 @@ export const state = {
         page: 1,
         resultsPerPage: RES_PER_PAGE,
     },
+    bookmarks: [],
 };
 
 export const loadRecipe = async function (id) {
@@ -48,6 +49,7 @@ export const loadSearchResults = async function (query) {
                 title: recipe.title,
             };
         });
+        state.search.page = 1;
     }
     catch (err) {
         console.error(`${err} 🔥🔥🔥🔥`);
@@ -71,3 +73,10 @@ export const updateServings = function (newServings) {
     state.recipe.servings = newServings;
 };
 
+export const addBookmark = function (recipe) {
+    // Add Bookmark
+    state.bookmarks.push(recipe);
+
+    // Mark currrent recipe as bookmark
+    state.recipe.bookmarked = true;
+};
