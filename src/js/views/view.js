@@ -18,9 +18,13 @@ export default class View {
     const newMarkup = this._generateMarkup();
 
     const newDOM = document.createRange().createContextualFragment(newMarkup);
+    const newElements = Array.from(newDOM.querySelectorAll('*'));
+    const currElements = Array.from(this._parentElement.querySelectorAll('*'));
 
-    const newElements = newDOM.querySelectorAll('*');
-    console.log(newElements);
+    newElements.forEach((newEl, i) => {
+      const currEl = currElements[i];
+      console.log(currEl, newEl.isEqualNode(currEl));
+    });
   }
 
   _clear() {
