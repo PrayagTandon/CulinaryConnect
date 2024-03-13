@@ -603,7 +603,7 @@ const controlRecipes = async function() {
         if (!id) return;
         (0, _recipeViewJsDefault.default).renderSpinner();
         // 0) Update results view to mark selected recipe
-        (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPage());
+        (0, _resultsViewJsDefault.default).update(_modelJs.getSearchResultsPage());
         // 1) Loading the recipe
         await _modelJs.loadRecipe(id);
         // 2) Rendering the call
