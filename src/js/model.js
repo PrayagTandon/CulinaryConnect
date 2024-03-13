@@ -91,5 +91,10 @@ export const addBookmark = function (recipe) {
 };
 
 export const deleteBookmark = function (id) {
+    // Delete Bookmark
+    const index = state.bookmarks.findIndex(element => element.id === id);
+    state.bookmarks.splice(index, 1);
 
-}
+    // Mark current recipe as NOT bookmarked
+    state.recipe.bookmarked = false;
+};
