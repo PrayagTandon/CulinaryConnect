@@ -2650,7 +2650,9 @@ class RecipeView extends (0, _viewJsDefault.default) {
               <use href="${0, _iconsSvgDefault.default}#icon-users"></use>
             </svg>
             <span class="recipe__info-data recipe__info-data--people">${this._data.servings}</span>
-            <span class="recipe__info-text">servings</span>
+            <span class="recipe__info-text">
+            ${this._data.servings === 1 ? "serving" : "servings"}
+            </span>
 
             <div class="recipe__info-buttons">
               <button class="btn--tiny btn--update-servings" data-update-to = "${this._data.servings - 1}">
