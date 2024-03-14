@@ -604,14 +604,13 @@ const controlRecipes = async function() {
         const id = window.location.hash.slice(1);
         if (!id) return;
         (0, _recipeViewJsDefault.default).renderSpinner();
-        // 0) Update results view to mark selected recipe
+        // 0) Updating ResultsView and BookmarkView
         (0, _resultsViewJsDefault.default).update(_modelJs.getSearchResultsPage());
+        (0, _bookmarksViewJsDefault.default).update(_modelJs.state.bookmarks);
         // 1) Loading the recipe
         await _modelJs.loadRecipe(id);
         // 2) Rendering the Recipe
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
-        // 3) Updating the bookmarks view
-        (0, _bookmarksViewJsDefault.default).update(_modelJs.state.bookmarks);
     } catch (err) {
         (0, _recipeViewJsDefault.default).renderError();
         console.error(err);
@@ -2615,7 +2614,9 @@ const init = function() {
     if (storage) state.bookmarks = JSON.parse(storage);
 };
 init();
-console.log(state.bookmarks);
+const clearBookmarks = function() {
+    localStorage.clear("bookmarks");
+};
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./config.js":"k5Hzs","./helpers.js":"hGI1E"}],"k5Hzs":[function(require,module,exports) {
 /* Contains varibales that are constant and are used throughout our project. */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
