@@ -606,6 +606,7 @@ const controlRecipes = async function() {
         (0, _recipeViewJsDefault.default).renderSpinner();
         // 0) Update results view to mark selected recipe
         (0, _resultsViewJsDefault.default).update(_modelJs.getSearchResultsPage());
+        (0, _bookmarksViewJsDefault.default).update(_modelJs.state.bookmarks);
         // 1) Loading the recipe
         await _modelJs.loadRecipe(id);
         // 2) Rendering the call
@@ -3251,14 +3252,27 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./view.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+var _previewViewJs = require("./previewView.js");
+var _previewViewJsDefault = parcelHelpers.interopDefault(_previewViewJs);
 class BookmarksView extends (0, _viewJsDefault.default) {
     _parentElement = document.querySelector(".bookmarks__list");
     _errorMessage = `No bookmarks yet. Find a nice recipe and bookmark it :)`;
     _successMessage = "";
     _generateMarkup() {
-        return this._data.map(this._generateMarkupPreview).join("");
+        console.log(this._data);
+        return this._data.map((result)=>(0, _previewViewJsDefault.default).render(result)).join("");
     }
-    _generateMarkupPreview(result) {
+}
+exports.default = new BookmarksView();
+
+},{"./view.js":"bWlJ9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./previewView.js":"1FDQ6"}],"1FDQ6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./view.js");
+var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+class PreviewView extends (0, _viewJsDefault.default) {
+    _parentElement = "";
+    _generateMarkup(result) {
         const id = window.location.hash.slice(1);
         return `
             <li class="preview">
@@ -3275,7 +3289,7 @@ class BookmarksView extends (0, _viewJsDefault.default) {
         `;
     }
 }
-exports.default = new BookmarksView();
+exports.default = new PreviewView();
 
 },{"./view.js":"bWlJ9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["hycaY","aenu9"], "aenu9", "parcelRequire37b9")
 
