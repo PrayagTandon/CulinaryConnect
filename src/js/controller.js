@@ -91,6 +91,7 @@ const controlBookmarks = function () {
 
 const controlAddRecipe = function (newRecipe) {
   console.log(newRecipe);
+  // addRecipeView();
 };
 
 const init = function () {
@@ -103,4 +104,3 @@ const init = function () {
   addRecipeView.addHandlerUpload(controlAddRecipe);
 };
 init();
-addRecipeView();
