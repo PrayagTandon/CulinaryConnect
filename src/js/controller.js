@@ -90,8 +90,9 @@ const controlBookmarks = function () {
 };
 
 const controlAddRecipe = function (newRecipe) {
-  console.log(newRecipe);
-  // addRecipeView();
+
+  // Upload the new Recipe Data
+  model.uploadRecipe(newRecipe);
 };
 
 const init = function () {

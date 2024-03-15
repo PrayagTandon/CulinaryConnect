@@ -115,4 +115,15 @@ init();
 
 const clearBookmarks = function () {
     localStorage.clear('bookmarks');
-}
+};
+
+export const uploadRecipe = async function (newRecipe) {
+    const ingredients = Object.entries(newRecipe).filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '').map(ing => {
+        const ingArr = ing[1].replaceAll(' ', '').split(',');
+        if (ingArr.length !== 3) throw new Error(`Wrong Ingredient format! Please enter the ingredients in correct format :)`);
+
+        const [qunatity, unit, description] = ingArr
+        return { qunatity: qunatity ? +qunatity : null, unit, description };
+    });
+    console.log(ingredients);
+};
