@@ -663,6 +663,7 @@ const controlAddRecipe = async function(newRecipe) {
     try {
         // Upload the new Recipe Data
         await _modelJs.uploadRecipe(newRecipe);
+        console.log(_modelJs.state.recipe);
     } catch (err) {
         (0, _addRecipeViewJsDefault.default).renderError(err.message);
     }
@@ -1934,20 +1935,23 @@ const state = {
     },
     bookmarks: []
 };
+const createRecipeObject = function(data) {
+    const { recipe } = data.data;
+    state.recipe = {
+        id: recipe.id,
+        img: recipe.image_url,
+        cookingTime: recipe.cooking_time,
+        publisher: recipe.publisher,
+        servings: recipe.servings,
+        sourceURL: recipe.source_url,
+        title: recipe.title,
+        ingredients: recipe.ingredients
+    };
+};
 const loadRecipe = async function(id) {
     try {
         const data = await (0, _helpersJs.getJSON)(`${(0, _configJs.API_URL)}${id}`);
-        const { recipe } = data.data;
-        state.recipe = {
-            id: recipe.id,
-            img: recipe.image_url,
-            cookingTime: recipe.cooking_time,
-            publisher: recipe.publisher,
-            servings: recipe.servings,
-            sourceURL: recipe.source_url,
-            title: recipe.title,
-            ingredients: recipe.ingredients
-        };
+        state.recipe = createRecipeObject(data);
         // Bookmarked Recipe Check
         if (state.bookmarks.some((bookmark)=>bookmark.id === id)) state.recipe.bookmarked = true;
         else state.recipe.bookmarked = false;
@@ -2035,8 +2039,8 @@ const uploadRecipe = async function(newRecipe) {
             servings: +newRecipe.servings,
             ingredients
         };
-        const data = await (0, _helpersJs.sendJSON)(`${(0, _configJs.API_URL)}?search=${recipe.title}&key=${(0, _configJs.KEY)}`, recipe);
-        console.log(data);
+        const data = await (0, _helpersJs.sendJSON)(`${(0, _configJs.API_URL)}?key=${(0, _configJs.KEY)}`, recipe);
+        state.recipe = createRecipeObject(data);
     } catch (err) {
         throw err;
     }

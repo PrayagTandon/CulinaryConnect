@@ -14,22 +14,25 @@ export const state = {
     bookmarks: [],
 };
 
+const createRecipeObject = function (data) {
+    const { recipe } = data.data;
+    state.recipe = {
+        id: recipe.id,
+        img: recipe.image_url,
+        cookingTime: recipe.cooking_time,
+        publisher: recipe.publisher,
+        servings: recipe.servings,
+        sourceURL: recipe.source_url,
+        title: recipe.title,
+        ingredients: recipe.ingredients,
+    };
+}
+
 export const loadRecipe = async function (id) {
 
     try {
         const data = await getJSON(`${API_URL}${id}`)
-
-        const { recipe } = data.data;
-        state.recipe = {
-            id: recipe.id,
-            img: recipe.image_url,
-            cookingTime: recipe.cooking_time,
-            publisher: recipe.publisher,
-            servings: recipe.servings,
-            sourceURL: recipe.source_url,
-            title: recipe.title,
-            ingredients: recipe.ingredients,
-        };
+        state.recipe = createRecipeObject(data);
 
         // Bookmarked Recipe Check
         if (state.bookmarks.some(bookmark => bookmark.id === id)) {
@@ -136,8 +139,8 @@ export const uploadRecipe = async function (newRecipe) {
             ingredients,
         };
 
-        const data = await sendJSON(`${API_URL}?search=${recipe.title}&key=${KEY}`, recipe);
-        console.log(data);
+        const data = await sendJSON(`${API_URL}?key=${KEY}`, recipe);
+        state.recipe = createRecipeObject(data);
     }
     catch (err) {
         throw err;
