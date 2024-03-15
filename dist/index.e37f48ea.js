@@ -2028,15 +2028,15 @@ const uploadRecipe = async function(newRecipe) {
         });
         const recipe = {
             title: newRecipe.title,
-            source_url: newRecipe.sourceURL,
-            image_url: newRecipe.img,
+            source_url: newRecipe.sourceUrl,
+            image_url: newRecipe.image,
             publisher: newRecipe.publisher,
             cooking_time: +newRecipe.cookingTime,
             servings: +newRecipe.servings,
             ingredients
         };
-        console.log(ingredients);
-        console.log(recipe);
+        const data = await (0, _helpersJs.sendJSON)(`${(0, _configJs.API_URL)}?search=${recipe.title}&key=${(0, _configJs.KEY)}`, recipe);
+        console.log(data);
     } catch (err) {
         throw err;
     }
@@ -2048,9 +2048,11 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", ()=>API_URL);
 parcelHelpers.export(exports, "TIMEOUT_SECONDS", ()=>TIMEOUT_SECONDS);
 parcelHelpers.export(exports, "RES_PER_PAGE", ()=>RES_PER_PAGE);
+parcelHelpers.export(exports, "KEY", ()=>KEY);
 const API_URL = `https://forkify-api.herokuapp.com/api/v2/recipes/`;
 const TIMEOUT_SECONDS = 10;
 const RES_PER_PAGE = 10;
+const KEY = "fd3f02d1-3eab-4e3f-8158-afb508061b1b";
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
