@@ -659,9 +659,13 @@ const controlAddBookmark = function() {
 const controlBookmarks = function() {
     (0, _bookmarksViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
-const controlAddRecipe = function(newRecipe) {
-    // Upload the new Recipe Data
-    _modelJs.uploadRecipe(newRecipe);
+const controlAddRecipe = async function(newRecipe) {
+    try {
+        // Upload the new Recipe Data
+        await _modelJs.uploadRecipe(newRecipe);
+    } catch (err) {
+        (0, _addRecipeViewJsDefault.default).renderError(err.message);
+    }
 };
 const init = function() {
     (0, _bookmarksViewJsDefault.default).addHandlerRender(controlBookmarks);
@@ -2011,17 +2015,31 @@ const clearBookmarks = function() {
     localStorage.clear("bookmarks");
 };
 const uploadRecipe = async function(newRecipe) {
-    const ingredients = Object.entries(newRecipe).filter((entry)=>entry[0].startsWith("ingredient") && entry[1] !== "").map((ing)=>{
-        const ingArr = ing[1].replaceAll(" ", "").split(",");
-        if (ingArr.length !== 3) throw new Error(`Wrong Ingredient format! Please enter the ingredients in correct format :)`);
-        const [qunatity, unit, description] = ingArr;
-        return {
-            qunatity: qunatity ? +qunatity : null,
-            unit,
-            description
+    try {
+        const ingredients = Object.entries(newRecipe).filter((entry)=>entry[0].startsWith("ingredient") && entry[1] !== "").map((ing)=>{
+            const ingArr = ing[1].replaceAll(" ", "").split(",");
+            if (ingArr.length !== 3) throw new Error(`Wrong Ingredient format! Please enter the ingredients in correct format :)`);
+            const [qunatity, unit, description] = ingArr;
+            return {
+                qunatity: qunatity ? +qunatity : null,
+                unit,
+                description
+            };
+        });
+        const recipe = {
+            title: newRecipe.title,
+            source_url: newRecipe.sourceURL,
+            image_url: newRecipe.img,
+            publisher: newRecipe.publisher,
+            cooking_time: +newRecipe.cookingTime,
+            servings: +newRecipe.servings,
+            ingredients
         };
-    });
-    console.log(ingredients);
+        console.log(ingredients);
+        console.log(recipe);
+    } catch (err) {
+        throw err;
+    }
 };
 
 },{"./config.js":"k5Hzs","./helpers.js":"hGI1E","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k5Hzs":[function(require,module,exports) {
