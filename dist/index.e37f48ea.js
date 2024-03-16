@@ -1937,7 +1937,7 @@ const state = {
 };
 const createRecipeObject = function(data) {
     const { recipe } = data.data;
-    state.recipe = {
+    return state.recipe = {
         id: recipe.id,
         img: recipe.image_url,
         cookingTime: recipe.cooking_time,
