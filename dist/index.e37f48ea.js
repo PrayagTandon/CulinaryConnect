@@ -1986,7 +1986,10 @@ const loadSearchResults = async function(query) {
                 id: recipe.id,
                 img: recipe.image_url,
                 publisher: recipe.publisher,
-                title: recipe.title
+                title: recipe.title,
+                ...recipe.key && {
+                    key: recipe.key
+                }
             };
         });
         state.search.page = 1;
@@ -2240,7 +2243,10 @@ class RecipeView extends (0, _viewJsDefault.default) {
             </div>
           </div>
 
-          <div class="recipe__user-generated">
+          <div class="recipe__user-generated ${this._data.key ? "" : "hidden"}">
+            <svg>
+              <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
+            </svg>
           </div>
           <button class="btn--round btn--bookmark">
             <svg class="">
@@ -2708,6 +2714,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./view.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+var _iconsSvg = require("../../img/icons.svg");
+var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class PreviewView extends (0, _viewJsDefault.default) {
     _parentElement = "";
     _generateMarkup() {
@@ -2721,6 +2729,11 @@ class PreviewView extends (0, _viewJsDefault.default) {
                     <div class="preview__data">
                         <h4 class="preview__title">${this._data.title}</h4>
                         <p class="preview__publisher">${this._data.publisher}</p>
+                        <div class="preview__user-generated ${this._data.key ? "" : "hidden"}">
+                            <svg>
+                            <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
+                            </svg>
+                        </div>
                     </div>
                 </a>
           </li>
@@ -2729,7 +2742,7 @@ class PreviewView extends (0, _viewJsDefault.default) {
 }
 exports.default = new PreviewView();
 
-},{"./view.js":"bWlJ9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6z7bi":[function(require,module,exports) {
+},{"./view.js":"bWlJ9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../img/icons.svg":"cMpiy"}],"6z7bi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./view.js");
